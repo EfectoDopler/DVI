@@ -15,7 +15,14 @@ function startGame() {
   ctx.fillStyle = "rgba(0,0,128,0.5)";
   ctx.fillRect(25,50,380,400);
 
-  SpriteSheet.load({explosion: {sx:0, sy:75, w:63, h:43, frames:3}}, function(){
-      SpriteSheet.draw(ctx, "explosion", 150, 225);
-  });
+  function animation(){
+    frame = 0;
+    setInterval(function (){
+      SpriteSheet.draw(ctx, "explosion", 150, 225, frame);
+      frame++;
+      if(frame >= 12) frame = 0;
+    },115);
+  }
+
+  SpriteSheet.load({explosion: {sx:0, sy:75, w:63, h:43}}, animation);
 }
