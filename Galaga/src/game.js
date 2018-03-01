@@ -1,28 +1,22 @@
-var canvas = document.getElementById('game');
-var ctx = canvas.getContext && canvas.getContext('2d');
+// le asigna un nombre a cada sprite, indicando sus dimensiones
+// en el spritesheet y su número de fotogramas
+var sprites = {
+  ship: { sx: 0, sy: 0, w: 38, h: 43, frames: 3 }
+};
 
-if(!ctx){
-  // No 2d context available, let the user know
-  alert('Please upgrade your browser');
+// Especifica lo que se debe pintar al cargar el juego - VER ESTO
+var startGame = function() {
+  SpriteSheet.draw(Game.ctx,"ship",100,100,1);
 }
-else{
-  startGame();
+// Indica que se llame al método de inicialización una vez
+// startGame
+window.addEventListener("load", function() {
+  Game.initialize("game",sprites,startGame);
+});
+
+var startGame = function() {
+  Game.setBoard(0,new TitleScreen("Alien Invasion", "Press fire to start playing", playGame));
 }
-
-function startGame() {
-  ctx.fillStyle = "#FFFF00";
-  ctx.fillRect(50,100,380,400);
-  ctx.fillStyle = "rgba(0,0,128,0.5)";
-  ctx.fillRect(25,50,380,400);
-
-  function animation(){
-    frame = 0;
-    setInterval(function (){
-      SpriteSheet.draw(ctx, "explosion", 150, 225, frame);
-      frame++;
-      if(frame >= 12) frame = 0;
-    },115);
-  }
-
-  SpriteSheet.load({explosion: {sx:0, sy:75, w:63, h:43}}, animation);
+var playGame = function() {
+  Game.setBoard(0, new TitleScreen("Alien Invasion", "Game Started ..."));
 }
