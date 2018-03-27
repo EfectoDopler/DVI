@@ -25,6 +25,7 @@
 
 
 var Game = new function() {
+  this.maxScore = 0;
   var boards = [];
 
   // Game Initialization
@@ -54,7 +55,7 @@ var Game = new function() {
 
 
   // Handle Input
-  var KEY_CODES = { 37:'left', 39:'right', 32 :'fire' };
+  var KEY_CODES = { 37:'left', 39:'right', 32:'fire', 38:'up', 40:'down'};
   this.keys = {};
 
   this.setupInput = function() {
@@ -93,8 +94,9 @@ var Game = new function() {
   };
 
   // Change an active game board
-  this.setBoard = function(num,board) { boards[num] = board; };
-
+  this.setBoard = function(num,board) {
+    boards[num] = board;
+  };
 
   this.setupMobile = function() {
     var container = document.getElementById("container"),
@@ -165,6 +167,7 @@ var SpriteSheet = new function() {
 
 var TitleScreen = function TitleScreen(title,subtitle,callback) {
   var up = false;
+
   this.step = function(dt) {
     if(!Game.keys['fire']) up = true;
     if(up && Game.keys['fire'] && callback) callback();
@@ -188,7 +191,6 @@ var TitleScreen = function TitleScreen(title,subtitle,callback) {
     ctx.fillText(subtitle,Game.width/2 - measure2.width/2,Game.height/2 + 40);
   };
 };
-
 
 var GameBoard = function() {
   var board = this;
