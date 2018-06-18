@@ -6,6 +6,7 @@ window.addEventListener("load",function(){
 
   Q.scene("level1",function(stage) {
     Q.stageTMX("level.tmx",stage);
+    
     // Inicializa el score a 0
     Q.state.set({ score: 0});
     var mario = stage.insert(new Q.Mario());
@@ -33,6 +34,7 @@ window.addEventListener("load",function(){
       Q.audio.stop();
       Q.audio.play("music_main.mp3",{ loop: true });
     });
+    
     container.fit(20);
   });
 
